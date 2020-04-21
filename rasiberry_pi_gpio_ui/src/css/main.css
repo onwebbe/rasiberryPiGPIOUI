@@ -1,0 +1,10 @@
+.deviceList li{
+  text-align: left;
+}
+.pi_device_card_list {
+  display: flex;
+}
+
+.view_GPIOOverview {
+  display: flex;
+}

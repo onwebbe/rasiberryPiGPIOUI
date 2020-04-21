@@ -18,7 +18,7 @@ class GPIOPin extends React.Component {
     if (this.state.pinObject.pinStatus == 0) {
       pinBackColor = 'green'
     } else {
-      pinBackColor = 'red'
+      pinBackColor = 'red                                                                                                                                                                                                                                                                                                                                                                   '
     }
     var label = <div style={{display: 'inline-block'}}>{this.state.pinObject.Name}</div>
     return (
