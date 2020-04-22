@@ -55,11 +55,11 @@ class PiGPIO extends React.Component {
     pinList.forEach((value, idx) => {
       if (idx % 2 === 0) {
         pinListElementLeft.push(
-          <GPIOPin pinObject={value} className="comp_gpioPin" position="left">
+          <GPIOPin key={value.Physical} pinObject={value} className="comp_gpioPin" position="left">
           </GPIOPin>)
       } else {
         pinListElementRight.push(
-          <GPIOPin pinObject={value} className="comp_gpioPin" position="right">
+          <GPIOPin key={value.Physical} pinObject={value} className="comp_gpioPin" position="right">
           </GPIOPin>)
       }
       

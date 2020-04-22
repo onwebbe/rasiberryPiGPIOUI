@@ -46,17 +46,13 @@ class DeviceFunctionContent extends React.Component {
         if (responseData.success == true || responseData.success == 'true') {
         }
         this.props.closePopoverFunction();
-        setTimeout(() => {
-          this.props.refreshPIGPIOStatus();
-        }, 100);
+        this.props.refreshPIGPIOStatus();
         resolve();
       })
       .catch((error) => {
         console.log(error);
         this.props.closePopoverFunction();
-        setTimeout(() => {
-          this.props.refreshPIGPIOStatus();
-        }, 100);
+        this.props.refreshPIGPIOStatus();
         resolve();
       })
     });
@@ -72,17 +68,13 @@ class DeviceFunctionContent extends React.Component {
         if (responseData.success == true || responseData.success == 'true') {
         }
         this.props.closePopoverFunction();
-        setTimeout(() => {
-          this.props.refreshPIGPIOStatus();
-        }, 100);
+        this.props.refreshPIGPIOStatus();
         resolve();
       })
       .catch((error) => {
         console.log(error);
         this.props.closePopoverFunction();
-        setTimeout(() => {
-          this.props.refreshPIGPIOStatus();
-        }, 100);
+        this.props.refreshPIGPIOStatus();
         resolve();
       })
     });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Skeleton, Card, Avatar, Popover, List, Modal, Input, Popconfirm, message  } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined, FormOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DownCircleOutlined, SettingOutlined, FormOutlined, DeleteOutlined } from '@ant-design/icons';
 import ServiceUrls from '../utils/ServiceUrls'
 import axios from 'axios';
 
@@ -238,7 +238,7 @@ class PiDevicerCard extends React.Component {
               trigger="click"
               visible={this.state.isShowMoreMenu}
               onVisibleChange={this.moreMenuVisibleChange}>
-              <EllipsisOutlined key="ellipsis" />
+              <DownCircleOutlined key="ellipsis" />
             </Popover>,
           ]}
         >
