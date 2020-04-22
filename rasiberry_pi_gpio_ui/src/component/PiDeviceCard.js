@@ -4,6 +4,9 @@ import { EditOutlined, EllipsisOutlined, SettingOutlined, FormOutlined, DeleteOu
 import ServiceUrls from '../utils/ServiceUrls'
 import axios from 'axios';
 
+import ChangePinDialogContent from './ChangePinDialogContent' 
+import DeviceFunctionContent from './DeviceFunctionContent'
+
 const { Meta } = Card;
 
 class PiDevicerCard extends React.Component {
@@ -21,12 +24,19 @@ class PiDevicerCard extends React.Component {
     this.onPiDeviceNameChange = this.onPiDeviceNameChange.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
     this.cancelDelete = this.cancelDelete.bind(this);
+
+    this.confirmUpdatePin = this.confirmUpdatePin.bind(this);
+    this.cancelUpdatePin = this.cancelUpdatePin.bind(this);
+    this.openUpdatePin = this.openUpdatePin.bind(this);
+    this.moreMenuVisibleChange = this.moreMenuVisibleChange.bind(this);
     this.state = {
       piDeviceInfo: this.props.piDeviceInfo?this.props.piDeviceInfo:null,
       isShowUpdateNewDlg: false,
       isShowActionMenu: false,
       updateDeviceName: this.props.piDeviceInfo?this.props.piDeviceInfo.piDeviceName:'',
-      isShowConfirmDeleteDlg: false
+      isShowConfirmDeleteDlg: false,
+      isShowUpdatePiDevicePin: false,
+      isShowMoreMenu: false
     }
   }
   componentDidMount() {
@@ -149,7 +159,6 @@ class PiDevicerCard extends React.Component {
         resolve();
       })
     });
-    
   }
   onPiDeviceNameChange(evt) {
     this.setState({
@@ -159,6 +168,27 @@ class PiDevicerCard extends React.Component {
   actionMenuVisibleChange(visible) {
     this.setState({
       isShowActionMenu: visible
+    })
+  }
+
+  openUpdatePin() {
+    this.setState({
+      isShowUpdatePiDevicePin: true
+    })
+  }
+  confirmUpdatePin() {
+    this.setState({
+      isShowUpdatePiDevicePin: false
+    })
+  }
+  cancelUpdatePin() {
+    this.setState({
+      isShowUpdatePiDevicePin: false
+    })
+  }
+  moreMenuVisibleChange(visible) {
+    this.setState({
+      isShowMoreMenu: visible
     })
   }
   render() {
@@ -182,21 +212,28 @@ class PiDevicerCard extends React.Component {
           )}/>
       </div>
     );
+
+    const moreMenuContent = <DeviceFunctionContent deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
     return (
       <div style={{display: 'inline-block', padding: 20 }}>
         <Card
           style={{ width: 300, marginTop: 16 }}
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
+            <SettingOutlined key="setting" onClick={this.openUpdatePin}/>,
             <Popover 
               content={content} 
               trigger="click"
               visible={this.state.isShowActionMenu}
               onVisibleChange={this.actionMenuVisibleChange}>
+              <EditOutlined key="edit" />
+            </Popover>,
+            <Popover 
+              content={moreMenuContent}
+              trigger="click"
+              visible={this.state.isShowMoreMenu}
+              onVisibleChange={this.moreMenuVisibleChange}>
               <EllipsisOutlined key="ellipsis" />
-            </Popover>
-            ,
+            </Popover>,
           ]}
         >
           <Skeleton loading={false} avatar active>
@@ -226,6 +263,14 @@ class PiDevicerCard extends React.Component {
         >
           <div>确认删除以下设备？</div>
           设备号：{this.state.piDeviceInfo?this.state.piDeviceInfo.id : ''}
+        </Modal>
+        <Modal
+          title="插入针脚"
+          visible={this.state.isShowUpdatePiDevicePin}
+          onOk={this.confirmUpdatePin}
+          onCancel={this.cancelUpdatePin}
+        >
+          <ChangePinDialogContent piDevicePinList={this.state.piDeviceInfo?this.state.piDeviceInfo.pinList:[]}></ChangePinDialogContent>
         </Modal>
       </div>
     )
