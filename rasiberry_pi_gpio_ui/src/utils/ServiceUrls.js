@@ -10,7 +10,7 @@ ServiceURLs.getPiDevices = '/api/v1/rasiberryPi/equiptment/getPiDevices'
 ServiceURLs.getPiDevicePins = '/api/v1/rasiberryPi/equiptment/getPiDevicePins/<piDeviceId>'
 ServiceURLs.attachPiDevicePinToBoard = '/api/v1/rasiberryPi/equiptment/attachPiDevicePinToBoard/<piDevicePinId>'
 
-ServiceURLs.LED = '/api/v1/rasiberryPi/equiptment/led/<piDeviceID>/<function>'
+ServiceURLs.LED = '/api/v1/rasiberryPi/equiptment/led/<piDeviceId>/<function>'
 
 ServiceURLs.deviceImages = '/static/deviceImages/';
 

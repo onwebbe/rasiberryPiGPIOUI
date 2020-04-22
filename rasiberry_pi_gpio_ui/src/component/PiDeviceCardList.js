@@ -34,7 +34,7 @@ class PiDeviceCardList extends React.Component {
   render() {
     var cardList = [];
     this.state.piDeviceList.forEach((piDevice, idx) => {
-    let card = <PiDeviceCard piDeviceInfo={piDevice} key={piDevice.id} refreshCardList={this.getDeviceList}></PiDeviceCard>
+    let card = <PiDeviceCard refreshPIGPIOStatus={this.props.refreshPIGPIOStatus} piDeviceInfo={piDevice} key={piDevice.id} refreshCardList={this.getDeviceList}></PiDeviceCard>
       cardList.push(card)
     })
     return (

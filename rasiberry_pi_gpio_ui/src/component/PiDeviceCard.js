@@ -29,6 +29,7 @@ class PiDevicerCard extends React.Component {
     this.cancelUpdatePin = this.cancelUpdatePin.bind(this);
     this.openUpdatePin = this.openUpdatePin.bind(this);
     this.moreMenuVisibleChange = this.moreMenuVisibleChange.bind(this);
+    this.closeMoreMenu = this.closeMoreMenu.bind(this);
     this.state = {
       piDeviceInfo: this.props.piDeviceInfo?this.props.piDeviceInfo:null,
       isShowUpdateNewDlg: false,
@@ -189,7 +190,12 @@ class PiDevicerCard extends React.Component {
   moreMenuVisibleChange(visible) {
     this.setState({
       isShowMoreMenu: visible
-    })
+    });
+  }
+  closeMoreMenu() {
+    this.setState({
+      isShowMoreMenu: false
+    });
   }
   render() {
     const actions = [{
@@ -213,7 +219,7 @@ class PiDevicerCard extends React.Component {
       </div>
     );
 
-    const moreMenuContent = <DeviceFunctionContent deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
+    const moreMenuContent = <DeviceFunctionContent refreshPIGPIOStatus={this.props.refreshPIGPIOStatus} closePopoverFunction={this.closeMoreMenu} deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
     return (
       <div style={{display: 'inline-block', padding: 20 }}>
         <Card

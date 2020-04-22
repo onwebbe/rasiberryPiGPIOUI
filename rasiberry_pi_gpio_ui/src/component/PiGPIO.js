@@ -15,6 +15,7 @@ class PiGPIO extends React.Component {
     this.updatePiStatus = this.updatePiStatus.bind(this);
   }
   componentDidMount() {
+    this.props.onRef(this)
     // await this._getAllPerson();
     // await this._getPersonById(this.props.personId);
     this.updatePiStatus();
