@@ -19,14 +19,18 @@ function MainLayout() {
             }}
             >
             <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-                <Menu.Item key="1">
-                <UserOutlined />
-                <span className="nav-text">nav 1</span>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['gpioOverview']}>
+                <Menu.Item key="gpioOverview">
+                <a href='#/gpioOverview'>
+                    <UserOutlined />
+                    <span className="nav-text">树莓派GPIO总览</span>
+                </a>
                 </Menu.Item>
-                <Menu.Item key="2">
-                <VideoCameraOutlined />
-                <span className="nav-text">nav 2</span>
+                <Menu.Item key="managePiDevice">
+                <a href='#/managePiDevice'>
+                    <VideoCameraOutlined />
+                    <span className="nav-text">树莓派设备管理</span>
+                </a>
                 </Menu.Item>
                 <Menu.Item key="3">
                 <UploadOutlined />

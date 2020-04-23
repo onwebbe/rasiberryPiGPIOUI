@@ -221,7 +221,7 @@ class PiDevicerCard extends React.Component {
 
     const moreMenuContent = <DeviceFunctionContent refreshPIGPIOStatus={this.props.refreshPIGPIOStatus} closePopoverFunction={this.closeMoreMenu} deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
     return (
-      <div style={{display: 'inline-block', padding: 20 }}>
+      <div style={{display: 'inline-block', padding: 5 }}>
         <Card
           style={{ width: 300, marginTop: 16 }}
           actions={[

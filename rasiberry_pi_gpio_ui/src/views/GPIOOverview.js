@@ -2,7 +2,7 @@ import React from 'react';
 import PiGPIO from '../component/PiGPIO'
 import PiDeviceCardList from '../component/PiDeviceCardList'
 import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Row, Col } from 'antd';
 class GPIOOverview extends React.Component {
   constructor(props) {
     super(props);
@@ -23,8 +23,14 @@ class GPIOOverview extends React.Component {
   render() {
     return (
       <div className={"view_GPIOOverview"}>
-        <PiGPIO onRef={this.onRef}></PiGPIO>
-        <PiDeviceCardList refreshPIGPIOStatus={this.refreshPIGPIOStatus}></PiDeviceCardList>
+        <Row gutter={16}>
+          <Col xs={24} sm={24} md={10} lg={10}>
+            <PiGPIO onRef={this.onRef}></PiGPIO>
+          </Col>
+          <Col xs={24} sm={24} md={14} lg={14}>
+            <PiDeviceCardList refreshPIGPIOStatus={this.refreshPIGPIOStatus}></PiDeviceCardList>
+          </Col>
+        </Row>
       </div>
     )
   }

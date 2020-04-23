@@ -88,7 +88,7 @@ class DeviceFunctionContent extends React.Component {
           dataSource={this.state.deviceFunction}
           renderItem={item => (
             <List.Item>
-              <a href="#" onClick={item.functionitem}>{item.name}</a>
+              <a onClick={item.functionitem}>{item.name}</a>
             </List.Item>
           )}
         />
