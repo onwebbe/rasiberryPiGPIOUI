@@ -32,7 +32,7 @@ class DeviceCardDeviceData extends React.Component {
     }
     this.timer = setInterval(()=> {
       this.getData();
-    }, 10000);
+    }, 3000);
   }
   stop() {
     clearInterval(this.timer);
