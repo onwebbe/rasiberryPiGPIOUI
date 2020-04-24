@@ -87,7 +87,7 @@ class DeviceCardDeviceData extends React.Component {
           // let data = '气压：' + piDeviceInfo.pressure +  ' PA 温度：' + piDeviceInfo.temperature + '°C altitude：' + piDeviceInfo.altitude;
           let data = <div><Row>
             <Col span="24">
-                气压 {piDeviceInfo.pressure}
+                气压 {piDeviceInfo.pressure} hPa
             </Col>
           </Row>
           <Row>
