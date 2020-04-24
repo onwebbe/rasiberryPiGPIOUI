@@ -95,7 +95,7 @@ class DeviceCardDeviceData extends React.Component {
                 温度 {piDeviceInfo.temperature} °C
             </Col>
             <Col span="12">
-                海拔 {piDeviceInfo.altitude}
+                海拔 {piDeviceInfo.altitude} 米
             </Col>
           </Row>
           </div>
