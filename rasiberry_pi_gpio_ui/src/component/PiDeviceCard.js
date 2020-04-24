@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import ChangePinDialogContent from './ChangePinDialogContent' 
 import DeviceFunctionContent from './DeviceFunctionContent'
+import DeviceCardDeviceData from './DeviceCardDeviceData'
 
 const { Meta } = Card;
 
@@ -30,6 +31,8 @@ class PiDevicerCard extends React.Component {
     this.openUpdatePin = this.openUpdatePin.bind(this);
     this.moreMenuVisibleChange = this.moreMenuVisibleChange.bind(this);
     this.closeMoreMenu = this.closeMoreMenu.bind(this);
+    this.onCardDataRef = this.onCardDataRef.bind(this);
+    this.passToChildren = this.passToChildren.bind(this);
     this.state = {
       piDeviceInfo: this.props.piDeviceInfo?this.props.piDeviceInfo:null,
       isShowUpdateNewDlg: false,
@@ -43,6 +46,12 @@ class PiDevicerCard extends React.Component {
   componentDidMount() {
     // await this._getAllPerson();
     // await this._getPersonById(this.props.personId);
+  }
+  onCardDataRef(ref) {
+    this.cardDataRef = ref;
+  }
+  passToChildren() {
+    return this;
   }
   getData() {
     return new Promise(resolve => {
@@ -219,7 +228,7 @@ class PiDevicerCard extends React.Component {
       </div>
     );
 
-    const moreMenuContent = <DeviceFunctionContent refreshPIGPIOStatus={this.props.refreshPIGPIOStatus} closePopoverFunction={this.closeMoreMenu} deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
+    const moreMenuContent = <DeviceFunctionContent passToChildren={this.passToChildren} refreshPIGPIOStatus={this.props.refreshPIGPIOStatus} closePopoverFunction={this.closeMoreMenu} deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
     return (
       <div style={{display: 'inline-block', padding: 5 }}>
         <Card
@@ -250,6 +259,9 @@ class PiDevicerCard extends React.Component {
               title={this.state.piDeviceInfo?this.state.piDeviceInfo.piDeviceName:''}
               description={this.state.piDeviceInfo?this.state.piDeviceInfo.piDeviceName:''}
             />
+            <div style={{width: '100%', textAlign: 'left'}}>
+              <DeviceCardDeviceData onCardDataRef={this.onCardDataRef} piDeviceInfo={this.state.piDeviceInfo}></DeviceCardDeviceData>
+            </div>
           </Skeleton>
         </Card>
         <Modal

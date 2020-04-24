@@ -11,6 +11,8 @@ ServiceURLs.getPiDevicePins = '/api/v1/rasiberryPi/equiptment/getPiDevicePins/<p
 ServiceURLs.attachPiDevicePinToBoard = '/api/v1/rasiberryPi/equiptment/attachPiDevicePinToBoard/<piDevicePinId>'
 
 ServiceURLs.LED = '/api/v1/rasiberryPi/equiptment/led/<piDeviceId>/<function>'
+ServiceURLs.DHT22 = '/api/v1/rasiberryPi/equiptment/DHT22/<piDeviceId>'
+ServiceURLs.BMP180 = '/api/v1/rasiberryPi/equiptment/BMP180/<piDeviceId>'
 
 ServiceURLs.deviceImages = '/static/deviceImages/';
 

@@ -12,6 +12,8 @@ class DeviceFunctionContent extends React.Component {
     }
     this.LED_lightOn = this.LED_lightOn.bind(this);
     this.LED_shutdown = this.LED_shutdown.bind(this);
+    this.start = this.start.bind(this);
+    this.stop = this.stop.bind(this);
   }
   componentDidMount() {
     // await this._getAllPerson();
@@ -33,7 +35,32 @@ class DeviceFunctionContent extends React.Component {
       this.setState({
         deviceFunction: ledFunctions
       })
+    } else if (deviceType === 'DHT22' || deviceType === 'BMP180') {
+      var startStopDeviceFunctions = [];
+      var start = {
+        name: '开始',
+        functionitem: this.start
+      }
+      startStopDeviceFunctions.push(start);
+      var stop = {
+        name: '停止',
+        functionitem: this.stop
+      }
+      startStopDeviceFunctions.push(stop);
+      this.setState({
+        deviceFunction: startStopDeviceFunctions
+      })
     }
+  }
+  start() {
+    var parent = this.props.passToChildren();
+    parent.cardDataRef.start();
+    this.props.closePopoverFunction();
+  }
+  stop() {
+    var parent = this.props.passToChildren();
+    parent.cardDataRef.stop();
+    this.props.closePopoverFunction();
   }
   LED_lightOn() {
     return new Promise(resolve => {
