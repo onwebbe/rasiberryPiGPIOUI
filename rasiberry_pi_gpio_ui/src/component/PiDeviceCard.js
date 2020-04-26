@@ -33,6 +33,9 @@ class PiDevicerCard extends React.Component {
     this.closeMoreMenu = this.closeMoreMenu.bind(this);
     this.onCardDataRef = this.onCardDataRef.bind(this);
     this.passToChildren = this.passToChildren.bind(this);
+    this._getStatusColor = this._getStatusColor.bind(this);
+    this.markDeviceAsRunning = this.markDeviceAsRunning.bind(this);
+    this.markDeviceAsStopped = this.markDeviceAsStopped.bind(this);
     this.state = {
       piDeviceInfo: this.props.piDeviceInfo?this.props.piDeviceInfo:null,
       isShowUpdateNewDlg: false,
@@ -40,7 +43,8 @@ class PiDevicerCard extends React.Component {
       updateDeviceName: this.props.piDeviceInfo?this.props.piDeviceInfo.piDeviceName:'',
       isShowConfirmDeleteDlg: false,
       isShowUpdatePiDevicePin: false,
-      isShowMoreMenu: false
+      isShowMoreMenu: false,
+      deviceRunningStatus: ''   //'' nothing, 'running'/'stopped'
     }
   }
   componentDidMount() {
@@ -206,6 +210,24 @@ class PiDevicerCard extends React.Component {
       isShowMoreMenu: false
     });
   }
+  markDeviceAsStopped() {
+    this.setState({
+      deviceRunningStatus: 'stopped'
+    })
+  }
+  markDeviceAsRunning() {
+    this.setState({
+      deviceRunningStatus: 'running'
+    })
+  }
+  _getStatusColor() {
+    switch(this.state.deviceRunningStatus) {
+      case 'stopped':
+        return 'red';
+      case 'running':
+        return 'green';
+    }
+  }
   render() {
     const actions = [{
       name: '修改Pi设备',
@@ -229,6 +251,11 @@ class PiDevicerCard extends React.Component {
     );
 
     const moreMenuContent = <DeviceFunctionContent passToChildren={this.passToChildren} refreshPIGPIOStatus={this.props.refreshPIGPIOStatus} closePopoverFunction={this.closeMoreMenu} deviceInfo={this.state.piDeviceInfo}></DeviceFunctionContent>
+    var deviceDescription = <div>
+      {this.state.piDeviceInfo?this.state.piDeviceInfo.piDeviceName:''}
+      <span style={{paddingLeft: 10}}></span>
+      <span style={{display: 'inline-block', width: 10, height: 10, borderRadius: 5, backgroundColor: this._getStatusColor()}}></span>
+    </div>
     return (
       <div style={{display: 'inline-block', padding: 5 }}>
         <Card
@@ -257,7 +284,7 @@ class PiDevicerCard extends React.Component {
                 <Avatar src={this.state.piDeviceInfo?ServiceUrls.getDeviceImageUrl(this.state.piDeviceInfo.deviceID):''} />
               }
               title={this.state.piDeviceInfo?this.state.piDeviceInfo.piDeviceName:''}
-              description={this.state.piDeviceInfo?this.state.piDeviceInfo.piDeviceName:''}
+              description={deviceDescription}
             />
             <div style={{width: '100%', textAlign: 'left'}}>
               <DeviceCardDeviceData onCardDataRef={this.onCardDataRef} piDeviceInfo={this.state.piDeviceInfo}></DeviceCardDeviceData>

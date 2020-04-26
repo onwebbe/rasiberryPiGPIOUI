@@ -35,7 +35,7 @@ class DeviceFunctionContent extends React.Component {
       this.setState({
         deviceFunction: ledFunctions
       })
-    } else if (deviceType === 'DHT22' || deviceType === 'BMP180') {
+    } else if (deviceType === 'DHT22' || deviceType === 'BMP180' || deviceType === 'GY30' || deviceType === 'RainDrop') {
       var startStopDeviceFunctions = [];
       var start = {
         name: '开始',
@@ -51,15 +51,19 @@ class DeviceFunctionContent extends React.Component {
         deviceFunction: startStopDeviceFunctions
       })
     }
+    var parent = this.props.passToChildren();
+    parent.markDeviceAsStopped();
   }
   start() {
     var parent = this.props.passToChildren();
     parent.cardDataRef.start();
+    parent.markDeviceAsRunning();
     this.props.closePopoverFunction();
   }
   stop() {
     var parent = this.props.passToChildren();
     parent.cardDataRef.stop();
+    parent.markDeviceAsStopped();
     this.props.closePopoverFunction();
   }
   LED_lightOn() {

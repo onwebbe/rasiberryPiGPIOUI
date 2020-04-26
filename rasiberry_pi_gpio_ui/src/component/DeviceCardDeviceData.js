@@ -16,6 +16,8 @@ class DeviceCardDeviceData extends React.Component {
     this.getData = this.getData.bind(this);
     this.getDHT22Data = this.getDHT22Data.bind(this);
     this.getBMP180Data = this.getBMP180Data.bind(this);
+    this.getGY30Data = this.getGY30Data.bind(this);
+    this.getRainDropData = this.getRainDropData.bind(this);
     this.state = {
       deviceData: null
     }
@@ -44,6 +46,10 @@ class DeviceCardDeviceData extends React.Component {
         this.getDHT22Data();
       } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'BMP180') {
         this.getBMP180Data();
+      } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'GY30') {
+        this.getGY30Data();
+      } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'RAINDROP') {
+        this.getRainDropData();
       }
     }
   }
@@ -96,6 +102,56 @@ class DeviceCardDeviceData extends React.Component {
             </Col>
             <Col span="12">
                 海拔 {piDeviceInfo.altitude} 米
+            </Col>
+          </Row>
+          </div>
+          this.setState({
+            deviceData: data
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    });
+  }
+  getGY30Data() {
+    return new Promise(resolve => {
+      var url = ServiceUrls.GY30;
+      url = url.replace('<piDeviceId>', this.props.piDeviceInfo.id);
+      axios.get(url)
+      .then((response) => {
+        var responseData = response.data;
+        if (responseData.success == true || responseData.success == 'true') {
+          let piDeviceInfo = responseData.data;
+          let data = <div><Row>
+          <Col span="24">
+                光照 {piDeviceInfo.lx} lx
+            </Col>
+          </Row>
+          </div>
+          this.setState({
+            deviceData: data
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    });
+  }
+  getRainDropData() {
+    return new Promise(resolve => {
+      var url = ServiceUrls.RainDrop;
+      url = url.replace('<piDeviceId>', this.props.piDeviceInfo.id);
+      axios.get(url)
+      .then((response) => {
+        var responseData = response.data;
+        if (responseData.success == true || responseData.success == 'true') {
+          let piDeviceInfo = responseData.data;
+          let data = <div><Row>
+          <Col span="24">
+               现在 {piDeviceInfo.rain === 'rain'? <span style={{color: 'red'}}>！！！下雨了！！！</span>: <span style={{color: 'green'}}>没有雨</span>}
             </Col>
           </Row>
           </div>
