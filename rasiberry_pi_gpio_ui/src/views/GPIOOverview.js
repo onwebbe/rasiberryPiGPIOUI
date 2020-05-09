@@ -24,11 +24,11 @@ class GPIOOverview extends React.Component {
     return (
       <div className={"view_GPIOOverview"}>
         <Row gutter={16}>
-          <Col xs={24} sm={24} md={10} lg={10}>
-            <PiGPIO onRef={this.onRef}></PiGPIO>
-          </Col>
           <Col xs={24} sm={24} md={14} lg={14}>
             <PiDeviceCardList refreshPIGPIOStatus={this.refreshPIGPIOStatus}></PiDeviceCardList>
+          </Col>
+          <Col xs={24} sm={24} md={10} lg={10}>
+            <PiGPIO onRef={this.onRef}></PiGPIO>
           </Col>
         </Row>
       </div>

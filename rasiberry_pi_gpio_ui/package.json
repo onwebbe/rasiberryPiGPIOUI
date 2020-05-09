@@ -11,7 +11,9 @@
     "axios": "^0.19.2",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^0.9.1",
+    "echarts": "^4.7.0",
     "less-loader": "^5.0.0",
+    "moment": "^2.24.0",
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.5",
     "react-dom": "^16.13.1",
@@ -39,6 +41,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.50.110:8888/",
+  "proxy": "http://localhost:8888/",
   "homepage": "/pi/"
 }

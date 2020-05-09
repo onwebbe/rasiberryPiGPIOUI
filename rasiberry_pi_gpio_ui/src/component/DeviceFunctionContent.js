@@ -35,7 +35,7 @@ class DeviceFunctionContent extends React.Component {
       this.setState({
         deviceFunction: ledFunctions
       })
-    } else if (deviceType === 'DHT22' || deviceType === 'BMP180' || deviceType === 'GY30' || deviceType === 'RainDrop') {
+    } else if (deviceType === 'DHT22' || deviceType === 'BMP180' || deviceType === 'GY30' || deviceType === 'RAINDROP') {
       var startStopDeviceFunctions = [];
       var start = {
         name: '开始',
