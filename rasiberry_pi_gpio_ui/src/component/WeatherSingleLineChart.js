@@ -131,7 +131,7 @@ export default class WeatherSingleLineChart extends React.Component {
                     height: '200px'
                 });
                 resolve();
-            }, 100);
+            }, 5000);
         });
     };
     setOption = option => {
