@@ -39,8 +39,10 @@ class MainLayout extends React.Component {
                     </a>
                     </Menu.Item>
                     <Menu.Item key="3">
-                    <UploadOutlined />
-                    <span className="nav-text">nav 3</span>
+                    <a href='#/weather'>
+                        <VideoCameraOutlined />
+                        <span className="nav-text">天气</span>
+                    </a>
                     </Menu.Item>
                     <Menu.Item key="4">
                     <UserOutlined />
@@ -50,7 +52,7 @@ class MainLayout extends React.Component {
                 </Sider>
                 <Layout>
                 <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
-                <Content style={{ margin: '24px 16px 0'}}>
+                <Content style={{ margin: '24px 16px 0', height: '100%'}}>
                     <div className="site-layout-background">
                         <Router></Router>
                     </div>

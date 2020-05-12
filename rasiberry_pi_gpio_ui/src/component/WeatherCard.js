@@ -5,7 +5,8 @@ class WeatherCard extends React.Component {
     super(props);
     this.props = props;
     this.state = {
-      
+      data: '',
+      data2: ''
     }
     this.getDeviceData = this.getDeviceData.bind(this);
   }
@@ -32,7 +33,12 @@ class WeatherCard extends React.Component {
     } else if (this.props.type === 'rain') {
       var data = await DeviceDataService.getRainDropData(this.props.piDeviceId);
       this.setState({
-        data: data.rain === 'rain' ? true: false
+        data: data.rain === 'rain' ? 'active': ''
+      });
+
+      var data = await DeviceDataService.getGY30Data(this.props.piDeviceId2);
+      this.setState({
+        data2: data.lx
       });
       
     }
@@ -43,13 +49,18 @@ class WeatherCard extends React.Component {
   <div className="cardValue" style={{width: '50%', height: '2em', textAlign: 'left', paddingLeft: 5, fontSize: '1rem'}}>{this.state.data} {this.props.unit}</div>
       </div>;
     var switchCard = <div className="weatherCard switch">
-      <div className="switchContainer">
-        <div className={"cardIcon icon rainny"}></div>
-        <div className={"mask " + this.state.data ? 'active': ''}></div>
+      <div style={{display: 'flex', fontSize: '1.1rem', alignItems: 'center'}}>
+        <span className="icon light" style={{width: '1.2em', height: '1.2em', marginRight: 5, backgroundSize: '100% 100%', display: 'inline-block'}}></span>{this.state.data2} lx
       </div>
-      <div className="switchContainer">
-        <div className={"cardIcon icon clearMorning"}></div>
-        <div className={"mask " + this.state.data ? '': 'active'}></div>
+      <div className="switchCardContainer">
+        <div className="switchContainer">
+          <div className={"cardIcon icon rainny"}></div>
+          <div className={"mask " + this.state.data ? 'active': ''}></div>
+        </div>
+        <div className="switchContainer">
+          <div className={"cardIcon icon clearMorning"}></div>
+          <div className={"mask " + this.state.data ? '': 'active'}></div>
+        </div>
       </div>
     </div>;
     return (

@@ -73,6 +73,20 @@ export default class WeatherSingleLineChart extends React.Component {
             var categoryData = data.category;
             var dataData = data.data;
             originalData.xAxis.data = categoryData;
+            if (this.props.isAsK == true) {
+              var newArray = []
+              dataData.forEach((value, idx) => {
+                value = value / 1000;
+                newArray.push(value);
+              });
+              dataData = newArray;
+              originalData.yAxis['axisLabel'] = {
+                formatter:(value) => {
+                  return value + 'k';
+                }
+              }
+              
+            }
             originalData.series[0].data = dataData;
             this.setOption(originalData);
           }
@@ -88,7 +102,7 @@ export default class WeatherSingleLineChart extends React.Component {
     }
     componentWillUnmount() {
         // 组件卸载前卸载图表
-        this.dispose();
+        // this.dispose();
     }
     render() {
         const { width, height } = this.state;
@@ -114,7 +128,7 @@ export default class WeatherSingleLineChart extends React.Component {
                     height: '200px'
                 });
                 resolve();
-            }, 0);
+            }, 100);
         });
     };
     setOption = option => {
@@ -125,7 +139,13 @@ export default class WeatherSingleLineChart extends React.Component {
         const notMerge = this.props.notMerge;
         const lazyUpdate = this.props.lazyUpdate;
  
-        this.chart.setOption(option, notMerge, lazyUpdate);
+        if (option) {
+          setTimeout(() => {
+            this.chart.setOption(option, notMerge, lazyUpdate);
+          }, 100);
+        }
+        
+        
     };
     dispose = () => {
         if (!this.chart) {

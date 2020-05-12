@@ -61,6 +61,15 @@
   margin-left: 5px;
 }
 
+.weatherView .weatherCard.switch {
+  flex-direction: column;
+}
+.weatherView .weatherCard.switch .switchCardContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-grow: 1;
+}
 .weatherView .weatherCard.switch .switchContainer {
   height: 100%;
   width: 50%;
@@ -115,6 +124,9 @@
 }
 .icon.clearMorning {
   background-image: url(./clearMorning.png);
+}
+.icon.light {
+  background-image: url(./light.png);
 }
 
 .weatherChartList {
