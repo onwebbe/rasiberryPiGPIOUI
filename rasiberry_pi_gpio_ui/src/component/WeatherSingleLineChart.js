@@ -58,6 +58,9 @@ export default class WeatherSingleLineChart extends React.Component {
         // 监听屏幕缩放，重新绘制 echart 图表
         // window.addEventListener('resize', throttle(this.resize, 100));
         this.getData();
+        this.timeInterval = setInterval(() => {
+          this.getData();
+        }, 120000);
     }
     getData() {
       return new Promise((resolve, reject) => {
@@ -102,7 +105,7 @@ export default class WeatherSingleLineChart extends React.Component {
     }
     componentWillUnmount() {
         // 组件卸载前卸载图表
-        // this.dispose();
+        this.dispose();
     }
     render() {
         const { width, height } = this.state;
@@ -151,6 +154,7 @@ export default class WeatherSingleLineChart extends React.Component {
         if (!this.chart) {
             return;
         }
+        clearInterval(this.timeInterval);
  
         this.chart.dispose();
         this.chart = null;

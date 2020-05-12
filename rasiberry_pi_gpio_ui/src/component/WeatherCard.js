@@ -12,6 +12,13 @@ class WeatherCard extends React.Component {
   }
   componentDidMount() {
     this.getDeviceData();
+    this.timeInterval = setInterval(() => {
+      this.getDeviceData();
+    }, 5000);
+  }
+  componentWillUnmount() {
+    // 组件卸载前卸载图表
+    clearInterval(this.timeInterval);
   }
   async getDeviceData() {
     if (this.props.type === 'temperature') {
