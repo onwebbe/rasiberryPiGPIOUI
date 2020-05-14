@@ -1,5 +1,5 @@
 import React from 'react';
-import WeatherSingleLineChart from './WeatherSingleLineChart';
+import WeatherSingleLineChartLink from './WeatherSingleLineChartLink';
 import WeatherTitle from './WeatherTitle';
 class WeatherCharts extends React.Component {
   constructor(props) {
@@ -78,9 +78,10 @@ class WeatherCharts extends React.Component {
     return (
       <div className="weatherChartList">
         <div className="weatherChart">
-          <WeatherSingleLineChart renderer='canvas' title="当日温度历史图" piDeviceId="2" dataName="temperature"></WeatherSingleLineChart>
-          <WeatherSingleLineChart renderer='canvas' title="当日光照历史图" piDeviceId="4" dataName="lx" isAsK={true}></WeatherSingleLineChart>
-          <WeatherSingleLineChart renderer='canvas' title="当日气压历史图" piDeviceId="3" dataName="pressure" isAsK={true}></WeatherSingleLineChart>
+          <WeatherSingleLineChartLink renderer='canvas' title="当日温度历史图" piDeviceId="2" dataName="temperature"></WeatherSingleLineChartLink>
+          <WeatherSingleLineChartLink renderer='canvas' title="当日湿度历史图" piDeviceId="2" dataName="humidity"></WeatherSingleLineChartLink>
+          <WeatherSingleLineChartLink renderer='canvas' title="当日光照历史图" piDeviceId="4" dataName="lx" isAsK={true}></WeatherSingleLineChartLink>
+          <WeatherSingleLineChartLink renderer='canvas' title="当日气压历史图" piDeviceId="3" dataName="pressure"></WeatherSingleLineChartLink>
         </div>
       </div>
     )

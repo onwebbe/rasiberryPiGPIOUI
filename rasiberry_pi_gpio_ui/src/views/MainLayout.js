@@ -6,10 +6,11 @@ import ViewPersonCardList from './ViewPersonCardList'
 const { Header, Content, Footer, Sider } = Layout;
 
 class MainLayout extends React.Component {
-    state = {
-        collapsed: false,
-    };
+    componentDidMount() {
+        console.log('x');
+    }
     render() {
+        const { collapse, onCollapse } = this.props
         return (
             <Layout>
                 <Sider
@@ -18,11 +19,8 @@ class MainLayout extends React.Component {
                 onBreakpoint={broken => {
                     console.log(broken);
                 }}
-                onCollapse={(collapsed, type) => {
-                    console.log(collapsed, type);
-                    this.setState({ collapsed });
-                }}
-                collapsible collapsed={this.state.collapsed}
+                onCollapse={onCollapse}
+                collapsible collapsed={collapse}
                 >
                 <div className="logo" />
                 <Menu theme="dark" mode="inline" defaultSelectedKeys={['gpioOverview']}>
@@ -43,10 +41,6 @@ class MainLayout extends React.Component {
                         <VideoCameraOutlined />
                         <span className="nav-text">天气</span>
                     </a>
-                    </Menu.Item>
-                    <Menu.Item key="4">
-                    <UserOutlined />
-                    <span className="nav-text">nav 4</span>
                     </Menu.Item>
                 </Menu>
                 </Sider>

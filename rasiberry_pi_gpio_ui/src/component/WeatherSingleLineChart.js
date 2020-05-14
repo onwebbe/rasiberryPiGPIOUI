@@ -32,7 +32,8 @@ export default class WeatherSingleLineChart extends React.Component {
                 data: []
             },
             yAxis: {
-                type: 'value'
+              scale: true,
+              type: 'value'
             },
             series: [{
                 data:   [],
@@ -60,7 +61,11 @@ export default class WeatherSingleLineChart extends React.Component {
         this.getData();
         this.timeInterval = setInterval(() => {
           this.getData();
-        }, 120000);
+        }, 60*1000*2);
+    }
+    async componentDidUpdate(nextProps, prevState) {
+      await this.initChart(this.el);
+      this.setOption(this.state.chartOption);
     }
     getData() {
       return new Promise((resolve, reject) => {
@@ -90,18 +95,18 @@ export default class WeatherSingleLineChart extends React.Component {
               }
               
             }
+
             originalData.series[0].data = dataData;
-            this.setOption(originalData);
+            
+            this.setState({
+              chartOption: originalData
+            });
           }
         })
         .catch((error) => {
           console.log(error);
         })
       });
-    }
-    componentDidUpdate() {
-        // 每次更新组件都重置
-        this.setOption(this.props.option);
     }
     componentWillUnmount() {
         // 组件卸载前卸载图表
@@ -124,14 +129,20 @@ export default class WeatherSingleLineChart extends React.Component {
         console.log(renderer);
  
         return new Promise(resolve => {
+            if (this.chart) {
+              this.chart.dispose();
+            }
             setTimeout(() => {
+              if (el){
                 this.chart = echarts.init(el, null, {
-                    renderer,
-                    width: 'auto',
-                    height: '200px'
+                  renderer,
+                  width: 'auto',
+                  height: '200px'
                 });
                 resolve();
-            }, 5000);
+              }
+                
+            }, 400);
         });
     };
     setOption = option => {
