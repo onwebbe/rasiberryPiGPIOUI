@@ -1,87 +1,51 @@
 import React from 'react';
 import WeatherSingleLineChartLink from './WeatherSingleLineChartLink';
 import WeatherTitle from './WeatherTitle';
+import ServiceUrls from '../utils/ServiceUrls'
+import axios from 'axios';
+
 class WeatherCharts extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
     this.state = {
-      option_lx: {
-        title: {
-          text: '当日光照历史图',
-          textStyle: {
-            color: '#fff'
-          },
-          left: 'center',
-          top: 10
-        },
-        xAxis: {
-            type: 'category',
-            data: ["16:00", "16:10", "16:20", "00:10", "00:20", "00:30", "00:40", "00:50", "01:00", "01:10", "01:20"]
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data:   [ "0.0", "0.0", "0.0", "19246.67", "19436.67", "20049.17", "20399.17", "20805.83", "21191.67", "21737.5", "24016.67" ],
-            type: 'line',
-            smooth: true
-        }]
-      },
-      option_pressure: {
-        title: {
-          text: '当日光照历史图',
-          textStyle: {
-            color: '#fff'
-          },
-          left: 'center',
-          top: 10
-        },
-        xAxis: {
-            type: 'category',
-            data: ["16:00",
-            "16:10",
-            "16:20",
-            "00:10",
-            "00:20",
-            "00:30",
-            "00:40",
-            "00:50",
-            "01:00",
-            "01:10",
-            "01:20"]
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data:   [ "1022.43",
-            "1022.51",
-            "1022.39",
-            "1024.08",
-            "1024.19",
-            "1024.33",
-            "1024.45",
-            "1024.48",
-            "1024.64",
-            "1024.69",
-            "1024.79" ],
-            type: 'line',
-            smooth: true
-        }]
-      }
+      chartList: []
     }
+    this.getWeatherChartList = this.getWeatherChartList.bind(this);
   }
   componentDidMount() {
+    this.getWeatherChartList();
+  }
+  getWeatherChartList() {
+    return new Promise(resolve => {
+      axios.get(ServiceUrls.getHistoryChartList)
+      .then((response) => {
+        var responseData = response.data;
+        if (responseData.success == true || responseData.success == 'true') {
+          let chartList = responseData.data;
+          this.setState({
+            'chartList': chartList
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    });
   }
   render() {
+    var chartListEle = [];
+    this.state.chartList.forEach(chart => {
+      chartListEle.push(<WeatherSingleLineChartLink key={chart.id} renderer='canvas' title={chart.title} piDeviceId={chart.piDeviceID} dataName={chart.deviceDataName} isAsK={chart.displayType == 1}></WeatherSingleLineChartLink>);
+    })
     return (
       <div className="weatherChartList">
         <div className="weatherChart">
-          <WeatherSingleLineChartLink renderer='canvas' title="当日温度历史图" piDeviceId="2" dataName="temperature"></WeatherSingleLineChartLink>
+          {/* <WeatherSingleLineChartLink renderer='canvas' title="当日温度历史图" piDeviceId="2" dataName="temperature"></WeatherSingleLineChartLink>
           <WeatherSingleLineChartLink renderer='canvas' title="当日湿度历史图" piDeviceId="2" dataName="humidity"></WeatherSingleLineChartLink>
           <WeatherSingleLineChartLink renderer='canvas' title="当日光照历史图" piDeviceId="4" dataName="lx" isAsK={true}></WeatherSingleLineChartLink>
-          <WeatherSingleLineChartLink renderer='canvas' title="当日气压历史图" piDeviceId="3" dataName="pressure"></WeatherSingleLineChartLink>
+          <WeatherSingleLineChartLink renderer='canvas' title="当日气压历史图" piDeviceId="3" dataName="pressure"></WeatherSingleLineChartLink> */}
+          {chartListEle}
         </div>
       </div>
     )

@@ -88,7 +88,7 @@ class ChangePinDialogContent extends React.Component {
     var selectOptionList = [];
     this.state.selectGPIOPinList.forEach((gpioPin, index) => {
       if (gpioPin.boardId != -1) {
-        var optionItem = <Option value={gpioPin.boardId}>
+        var optionItem = <Option value={gpioPin.boardId} key={gpioPin.boardId}>
           <div className="demo-option-label-item">
             <span>
               {gpioPin.name}
@@ -103,7 +103,7 @@ class ChangePinDialogContent extends React.Component {
         </Option>
         selectOptionList.push(optionItem);
       } else {
-        var optionItem = <Option value={gpioPin.boardId}>
+        var optionItem = <Option value={gpioPin.boardId} key={gpioPin.boardId}>
           <div className="demo-option-label-item">
             <span>
               {gpioPin.name}

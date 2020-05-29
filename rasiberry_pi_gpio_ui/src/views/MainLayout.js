@@ -42,6 +42,12 @@ class MainLayout extends React.Component {
                         <span className="nav-text">天气</span>
                     </a>
                     </Menu.Item>
+                    <Menu.Item key="4">
+                    <a href='#/chartConfig'>
+                        <VideoCameraOutlined />
+                        <span className="nav-text">图表配置</span>
+                    </a>
+                    </Menu.Item>
                 </Menu>
                 </Sider>
                 <Layout>

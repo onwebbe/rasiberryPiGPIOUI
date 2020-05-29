@@ -17,7 +17,14 @@ ServiceURLs.GY30 = '/api/v1/rasiberryPi/equiptment/GY30/<piDeviceId>'
 ServiceURLs.RainDrop = '/api/v1/rasiberryPi/equiptment/RainDrop/<piDeviceId>'
 ServiceURLs.deviceImages = '/static/deviceImages/';
 
-ServiceURLs.getSingleLineChartData = '/api/v1/rasiberryPi/equiptmentData/getTodaySingleGraphData/<piDeviceId>/<dataName>'
+ServiceURLs.getSingleLineChartData = '/api/v1/rasiberryPi/equiptmentData/getTodaySingleGraphData/<piDeviceId>/<dataName>';
+
+ServiceURLs.getHistoryChartList = '/api/v1/rasiberryPi/equiptmentData/getHistoryChartList'
+ServiceURLs.addHistoryChartList = '/api/v1/rasiberryPi/equiptmentData/addHistoryChartList'
+ServiceURLs.updateHistoryChartList = '/api/v1/rasiberryPi/equiptmentData/updateHistoryChartList/<chartId>'
+ServiceURLs.deleteHistoryChart = '/api/v1/rasiberryPi/equiptmentData/deleteHistoryChart/<chartId>'
+ServiceURLs.getDeviceDataNamesByDeviceId = '/api/v1/rasiberryPi/equiptmentData/getDeviceDataNamesByDeviceId/<piDeviceId>'
+
 ServiceURLs.getDeviceImageUrl = function(deviceId) {
   return ServiceURLs.deviceImages + deviceId + '.jpg';
 }
