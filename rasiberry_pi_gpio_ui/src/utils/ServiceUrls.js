@@ -14,6 +14,7 @@ ServiceURLs.LED = '/api/v1/rasiberryPi/equiptment/led/<piDeviceId>/<function>'
 ServiceURLs.DHT22 = '/api/v1/rasiberryPi/equiptment/DHT22/<piDeviceId>'
 ServiceURLs.BMP180 = '/api/v1/rasiberryPi/equiptment/BMP180/<piDeviceId>'
 ServiceURLs.GY30 = '/api/v1/rasiberryPi/equiptment/GY30/<piDeviceId>'
+ServiceURLs.RotationCount = '/api/v1/rasiberryPi/equiptment/RotationCount/<piDeviceId>'
 ServiceURLs.RainDrop = '/api/v1/rasiberryPi/equiptment/RainDrop/<piDeviceId>'
 ServiceURLs.deviceImages = '/static/deviceImages/';
 

@@ -50,6 +50,8 @@ class DeviceCardDeviceData extends React.Component {
         this.getGY30Data();
       } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'RAINDROP') {
         this.getRainDropData();
+      } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'HRotation') {
+        this.getRataionCount();
       }
     }
   }
@@ -153,6 +155,31 @@ class DeviceCardDeviceData extends React.Component {
           <Col span="24">
                现在 {piDeviceInfo.rain === 'rain'? <span style={{color: 'red'}}>！！！下雨了！！！</span>: <span style={{color: 'green'}}>没有雨</span>}
             </Col>
+          </Row>
+          </div>
+          this.setState({
+            deviceData: data
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    });
+  }
+  getRataionCount() {
+    return new Promise(resolve => {
+      var url = ServiceUrls.RotationCount;
+      url = url.replace('<piDeviceId>', this.props.piDeviceInfo.id);
+      axios.get(url)
+      .then((response) => {
+        var responseData = response.data;
+        if (responseData.success == true || responseData.success == 'true') {
+          let speedData = responseData.data;
+          let data = <div><Row>
+          <Col span="24">
+            {speedData} RPM
+          </Col>
           </Row>
           </div>
           this.setState({

@@ -44,7 +44,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.50.110:8888/",
+  "proxy": "http://localhost:8888/",
   "homepage": "/pi/",
   "devDependencies": {
     "redux-logger": "^3.0.6"

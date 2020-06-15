@@ -78,4 +78,23 @@ DeviceDataService.getRainDropData = function(piDeviceId) {
     })
   });
 }
+DeviceDataService.getRotationCountData = function(piDeviceId) {
+  return new Promise(resolve => {
+    var url = ServiceUrls.RotationCount;
+    url = url.replace('<piDeviceId>', piDeviceId);
+    axios.get(url)
+    .then((response) => {
+      var responseData = response.data;
+      if (responseData.success == true || responseData.success == 'true') {
+        let piDeviceInfo = responseData.data;
+        resolve(piDeviceInfo);
+      } else {
+        resolve(null);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  });
+}
 export default DeviceDataService;

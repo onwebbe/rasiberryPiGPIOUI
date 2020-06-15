@@ -47,7 +47,11 @@ class WeatherCard extends React.Component {
       this.setState({
         data2: data.lx
       });
-      
+    } else if (this.props.type === 'wind') {
+      var data = await DeviceDataService.getRotationCountData(this.props.piDeviceId);
+      this.setState({
+        data: data
+      });
     }
   }
   render() {
