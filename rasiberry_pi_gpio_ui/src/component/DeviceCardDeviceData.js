@@ -52,6 +52,8 @@ class DeviceCardDeviceData extends React.Component {
         this.getRainDropData();
       } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'HRotation') {
         this.getRataionCount();
+      } else if (this.props.piDeviceInfo.deviceDetail.deviceType === 'HallV2') {
+        this.getRataionCountV2();
       }
     }
   }
@@ -176,6 +178,34 @@ class DeviceCardDeviceData extends React.Component {
         var responseData = response.data;
         if (responseData.success == true || responseData.success == 'true') {
           let speedData = responseData.data;
+          let data = <div><Row>
+          <Col span="24">
+            {speedData} RPM
+          </Col>
+          </Row>
+          </div>
+          this.setState({
+            deviceData: data
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    });
+  }
+  getRataionCountV2() {
+    return new Promise(resolve => {
+      var url = ServiceUrls.RotationCountV2;
+      url = url.replace('<piDeviceId>', this.props.piDeviceInfo.id);
+      axios.get(url)
+      .then((response) => {
+        var responseData = response.data;
+        if (responseData.success == true || responseData.success == 'true') {
+          let speedData = responseData.data;
+          speedData = speedData * 100;
+          speedData = Math.round(speedData);
+          speedData = speedData / 100;
           let data = <div><Row>
           <Col span="24">
             {speedData} RPM
