@@ -28,7 +28,7 @@ class WeatherCardList extends React.Component {
             <WeatherCard type="rain" category="switch" piDeviceId="5" piDeviceId2="4"></WeatherCard>
           </Col>
           <Col xs={12} sm={12} md={8} lg={6}>
-            <WeatherCard type="wind" piDeviceId="6"></WeatherCard>
+            <WeatherCard type="wind" unit="RPM" piDeviceId="9"></WeatherCard>
           </Col>
         </Row>
       </div>

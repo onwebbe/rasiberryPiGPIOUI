@@ -80,7 +80,7 @@ DeviceDataService.getRainDropData = function(piDeviceId) {
 }
 DeviceDataService.getRotationCountData = function(piDeviceId) {
   return new Promise(resolve => {
-    var url = ServiceUrls.RotationCount;
+    var url = ServiceUrls.RotationCountV2;
     url = url.replace('<piDeviceId>', piDeviceId);
     axios.get(url)
     .then((response) => {
