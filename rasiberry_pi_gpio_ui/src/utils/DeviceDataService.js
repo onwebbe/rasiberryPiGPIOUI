@@ -87,6 +87,7 @@ DeviceDataService.getRotationCountData = function(piDeviceId) {
       var responseData = response.data;
       if (responseData.success == true || responseData.success == 'true') {
         let piDeviceInfo = responseData.data;
+        piDeviceInfo = Math.round(piDeviceInfo * 10) / 10;
         resolve(piDeviceInfo);
       } else {
         resolve(null);
